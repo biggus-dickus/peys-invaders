@@ -75,28 +75,8 @@ export default function render() {
       iProj.position.x + iProj.width >= player.position.x &&
       iProj.position.x <= player.position.x + player.width
     ) {
-      createParticles({
-        container: particles,
-        ctx,
-        object: player,
-      })
-      player.opacity = 0
-      game.over = true
-
       setTimeout(() => invaderProjectiles.splice(projIndex, 1), 0)
-      setTimeout(() => {
-        game.stop(() => {
-          grids.length = 0
-          invaderProjectiles.length = 0
-          playerProjectiles.length = 0
-          frames = 0
-          player.opacity = 1
-          player.position.x = Math.floor(canvas.width / 2 - player.width / 2)
-          keys.ArrowRight.pressed = false
-          keys.ArrowLeft.pressed = false
-          window.cancelAnimationFrame(requestId)
-        })
-      }, 2000)
+      handleGameOver(requestId)
     }
   })
 
@@ -105,6 +85,14 @@ export default function render() {
       setTimeout(() => grids.splice(gridIndex, 1), 0)
     } else {
       grid.update()
+    }
+
+    if (
+      grid.position.y + grid.height >= player.position.y &&
+      player.position.x + player.width >= grid.position.x &&
+      grid.position.x + grid.width >= player.position.x
+    ) {
+      handleGameOver(requestId)
     }
 
     // Spawn invader projectiles
@@ -168,7 +156,7 @@ export default function render() {
   frames++
 }
 
-const keyHandler = (e: KeyboardEvent, isUp?: boolean): void => {
+const keyHandler = (e: KeyboardEvent, isUp?: boolean) => {
   if (game.over) return
 
   if (e.code in keys) {
@@ -195,6 +183,31 @@ const keyHandler = (e: KeyboardEvent, isUp?: boolean): void => {
       ),
     )
   }
+}
+
+function handleGameOver(reqId: number) {
+  player.opacity = 0
+  game.over = true
+
+  createParticles({
+    container: particles,
+    ctx,
+    object: player,
+  })
+
+  setTimeout(() => {
+    game.stop(() => {
+      grids.length = 0
+      invaderProjectiles.length = 0
+      playerProjectiles.length = 0
+      frames = 0
+      player.opacity = 1
+      player.position.x = Math.floor(canvas.width / 2 - player.width / 2)
+      keys.ArrowRight.pressed = false
+      keys.ArrowLeft.pressed = false
+      window.cancelAnimationFrame(reqId)
+    })
+  }, 2000)
 }
 
 window.addEventListener('keydown', keyHandler)
