@@ -1,0 +1,78 @@
+:root {
+  font-family: ui-monospace, Consolas, "Liberation Mono", Courier, monospace;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-size: .75rem;
+  color: #fff;
+  background-color: #000;
+}
+
+button {
+  font-family: inherit;
+}
+
+small {
+  font-size: .75rem;
+}
+
+#app {
+  position: relative;
+  width: 1024px;
+  height: 576px;
+}
+
+.score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  margin: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  height: 90vh;
+  margin: auto;
+  font-size: 1.25rem;
+  text-align: center;
+  background-color: rgba(0, 0, 0, .85);
+}
+
+.overlay__title,
+.overlay__inner button {
+  text-transform: uppercase;
+}
+
+.overlay__inner button {
+  margin-top: 1.5em;
+  font-size: 2rem;
+  letter-spacing: .05em;
+}
+
+.hint {
+  margin-top: 25px;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/style.css">
+    <title>Invaders! Possibly from space!</title>
+  </head>
+  <body>
+    <div id="app">
+      <p class="score">
+        <span>Score:</span>
+        <span id="score-el">0</span>
+      </p>
+      <canvas id="canvas"></canvas>
+      <section id="overlay" class="overlay">
+        <div class="overlay__inner">
+          <h1 class="overlay__title hidden" id="gamover">Game Over!</h1>
+          <div id="hint" class="hint">
+            <p>← → to move, ␣ to shoot</p>
+            <small>Best played at 60 Hz/FPS</small>
+          </div>
+          <button type="button" id="start-el">Start game</button>
+        </div>
+      </section>
+    </div>
+    <script type="module" src="/src/index.ts"></script>
+  </body>
+</html>
